@@ -1,0 +1,16 @@
+header {
+    background-color: #302f2f;
+    text-align: center;
+    color: white;
+}
+.container-fluid{
+    background-color: lightcoral;
+    width: 100%;
+    padding: 50px 0px;
+}
+
+section, aside{
+    background-color: white;
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
