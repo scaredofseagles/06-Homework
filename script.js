@@ -75,10 +75,21 @@ function searchWeather(){
                     }
                 }
         
-                
+                if (response.current.uvi <= 3 ) {
+                    $('#uvIdx').attr("class", "badge-primary")
+                } else if ( response.current.uvi > 3 && response.current.uvi < 8){
+                    $('#uvIdx').attr("class", "badge-warning")
+                } else if (response.current.uvi >=8 && response.current.uvi < 11) {
+                    $('#uvIdx').attr("class", "badge-danger")
+                }else {
+                    $('#uvIdx').attr("class", "badge-dark")
+                }
             })
         }
         
+
+        
+
         searchWeekWeather()
     });
 
