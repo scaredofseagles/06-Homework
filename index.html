@@ -17,6 +17,7 @@
    <main class="container-fluid">
        <div class="row">
            <div class="col-sm-3">
+               <p id="currentTime"></p>
                 <aside class="searchHistory">
                     <h5>Search for a City: </h5>
                     <div class="input-group mb-3">
@@ -26,11 +27,7 @@
                         </div>
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                    
                     </ul>
                 </aside>
             </div>
@@ -41,18 +38,14 @@
                     <p id="temp"></p>
                     <p id="humid"></p>
                     <p id="wind"></p>
-                    <p id="uvIdx" class="badge"></p>
+                    <p id="uvIdx"></p>
                 </section>
                 <section class="weekTemp">
                     <h3>5-Day Forecast: </h3>
                     <div class="row">
                         <div class="col">
-                            <div class="card" style="width: 18rem;">
-                                <div id="1stDay" class="card-body">
-                                    <h5 class="date">sample</h5>
-                                    <p class="icon"></p>
-                                    <p class="temp"></p>
-                                    <p class="humid"></p>
+                            <div id="1stDay" class="card" style="width: 18rem;">
+                                <div class="card-body">
                                 </div>
                             </div>
                         </div>
@@ -60,7 +53,6 @@
                         <div class="col">
                             <div id="2ndDay" class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                This is some text within a card body.
                                 </div>
                             </div>
                         </div>
@@ -68,7 +60,6 @@
                         <div class="col">
                             <div id="3rdDay" class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                This is some text within a card body.
                                 </div>
                             </div>
                         </div>
@@ -76,7 +67,6 @@
                         <div class="col">
                             <div id="4thDay" class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                This is some text within a card body.
                                 </div>
                             </div>
                         </div>
@@ -84,7 +74,6 @@
                         <div class="col">
                             <div id="5thDay" class="card" style="width: 18rem;">
                                 <div class="card-body">
-                                This is some text within a card body.
                                 </div>
                             </div>
                         </div>
@@ -95,6 +84,7 @@
         </div>
         
     </main> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>

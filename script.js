@@ -4,18 +4,47 @@ let pastSearches = []
 localStorage.setItem('items', JSON.stringify(pastSearches))
 const data = JSON.parse(localStorage.getItem('items'))
 
+
+
+function renderButtons(){
+    $('.list-group').empty();
+
+    for (var i=0; i<pastSearches.length;i++){
+        var a = $("<li>")
+        a.addClass("list-group-item");
+        a.attr("data-name", pastSearches[i])
+        a.text(pastSearches[i])
+        $(".list-group").prepend(a)
+    }
+}
+
+
+function saveItem(){
+    var cityName = document.getElementById('citySearch').value
+
+    if ( localStorage.pastSearches ){
+        JSON.parse(localStorage.pastSearches)
+    } else {
+        pastSearches = []
+    }
+    pastSearches.map(function(){
+        $('.list-group').html(`<li class="list-group-item">${pastSearches}</li>`)
+    })
+    pastSearches.push(cityName)
+}
+
+
 function searchWeather(){
     console.log('[searchWeather] started ...')
     var apiKey = "1764725cf4acb2b623feb3d307894531"
     var cityName = document.getElementById('citySearch').value
-
+    
     pastSearches.push(cityName)
-
     $.ajax({
         url:`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`,
         method:"GET"
     }).then(function(response){
-        console.log(response.weather[0])
+        $('#currentTime').html(`${moment().format("dddd, MMMM Do, h:mm a")}`)
         $('.cityName').html(`${response.name} <img src="http://openweathermap.org/img/wn/${response.weather[0].icon}.png" >`)
         $('#temp').html(`Temperature: ${response.main.temp} &deg;C    Feels Like: ${response.main.feels_like} &deg;C`)
         $('#humid').text(`Humidity: ${response.main.humidity} %`)
@@ -31,43 +60,40 @@ function searchWeather(){
                 method:"GET"
             }).then(function(response){
                 var forecastList = response.daily
-                console.log(forecastList)
-
-                $('#uvIdx').text(`UV Index: ${response.current.uvi}`)
 
                 for(var i=0; i<5; i++){
                     
                     if( i === 0){
                         $('#1stDay').html(`
-                        <h5>${convertUnix(forecastList[i].dt)}</h5>
+                        <h5>${moment().add(1, 'days')._d}</h5>
                         <img src="http://openweathermap.org/img/wn/${forecastList[i].weather[0].icon}.png" />
                         <p> Temperature: ${forecastList[i].temp.day} &deg;C</p>
                         <p>Humidity: ${forecastList[i].humidity} %</p>
                         `)
                     } else if ( i === 1 ){
                         $('#2ndDay').html(`
-                        <h5>${forecastList[i].dt}</h5>
+                        <h5>${moment().add(2, 'days')._d}</h5>
                         <img src="http://openweathermap.org/img/wn/${forecastList[i].weather[0].icon}.png" />
                         <p> Temperature: ${forecastList[i].temp.day} &deg;C</p>
                         <p>Humidity: ${forecastList[i].humidity} %</p>
                         `)
                     } else if ( i === 2 ){
                         $('#3rdDay').html(`
-                        <h5>${forecastList[i].dt}</h5>
+                        <h5>${moment().add(3, 'days')._d}</h5>
                         <img src="http://openweathermap.org/img/wn/${forecastList[i].weather[0].icon}.png" />
                         <p> Temperature: ${forecastList[i].temp.day} &deg;C</p>
                         <p>Humidity: ${forecastList[i].humidity} %</p>
                         `)
                     } else if ( i === 3 ){
                         $('#4thDay').html(`
-                        <h5>${forecastList[i].dt}</h5>
+                        <h5>${moment().add(4, 'days')._d}</h5>
                         <img src="http://openweathermap.org/img/wn/${forecastList[i].weather[0].icon}.png" />
                         <p> Temperature: ${forecastList[i].temp.day} &deg;C</p>
                         <p>Humidity: ${forecastList[i].humidity} %</p>
                         `)
                     } else if ( i === 4 ){
                         $('#5thDay').html(`
-                        <h5>${forecastList[i].dt}</h5>
+                        <h5>${moment().add(5, 'days')._d}</h5>
                         <img src="http://openweathermap.org/img/wn/${forecastList[i].weather[0].icon}.png" />
                         <p> Temperature: ${forecastList[i].temp.day} &deg;C</p>
                         <p>Humidity: ${forecastList[i].humidity} %</p>
@@ -76,13 +102,13 @@ function searchWeather(){
                 }
         
                 if (response.current.uvi <= 3 ) {
-                    $('#uvIdx').attr("class", "badge-primary")
+                    $('#uvIdx').html(`UV Index: <span class="badge badge-success">${response.current.uvi}</span>`)
                 } else if ( response.current.uvi > 3 && response.current.uvi < 8){
-                    $('#uvIdx').attr("class", "badge-warning")
+                    $('#uvIdx').html(`UV Index: <span class="badge badge-warning">${response.current.uvi}</span>`)
                 } else if (response.current.uvi >=8 && response.current.uvi < 11) {
-                    $('#uvIdx').attr("class", "badge-danger")
+                    $('#uvIdx').html(`UV Index: <span class="badge badge-danger">${response.current.uvi}</span>`)
                 }else {
-                    $('#uvIdx').attr("class", "badge-dark")
+                    $('#uvIdx').html(`UV Index: <span class="badge badge-dark">${response.current.uvi}</span>`)
                 }
             })
         }
@@ -92,22 +118,8 @@ function searchWeather(){
 
         searchWeekWeather()
     });
-
+    
+    renderButtons()
 }
 
-function convertUnix(currentTime){
-    var timeStamp = currentTime
 
-    $.ajax({
-        url:`https://showcase.api.linx.twenty57.net/UnixTime/fromunix?timestamp=${timeStamp}`,
-        method: "GET"
-    }).then(function(response){
-        var timeDate = response
-        console.log(response) 
-        return response;
-    });
-}
-
-function saveItem(){
-
-}
