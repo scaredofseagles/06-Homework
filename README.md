@@ -27,7 +27,7 @@ As a weather dashboard, I needed to display the temperature as well as humidity,
 
 The following image is an example of the web application's appearance and functionality:
 
-![Image]()
+![Image](Assets/weather-dashboard-screenshot.png)
 
 ## What I Did
 
@@ -90,7 +90,7 @@ $('#currentTime').html(`${moment().format("dddd, MMMM Do, h:mm a")}`)
 
 ## URL
 
-See the web application [here]()
+See the web application [here](https://scaredofseagles.github.io/06-Homework/)
 
 ## License
 
