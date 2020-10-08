@@ -1,9 +1,11 @@
 $('button').on('click', searchWeather);
-let pastSearches = []
 
-localStorage.setItem('items', JSON.stringify(pastSearches))
-const data = JSON.parse(localStorage.getItem('items'))
 
+var pastSearches = localStorage.getItem(pastSearches) ? JSON.parse(localStorage.getItem(pastSearches)) : [];
+
+
+localStorage.setItem("cities", JSON.stringify(pastSearches))
+const data = JSON.parse(localStorage.getItem("cities"))
 
 
 function renderButtons(){
@@ -16,21 +18,8 @@ function renderButtons(){
         a.text(pastSearches[i])
         $(".list-group").prepend(a)
     }
-}
 
-
-function saveItem(){
-    var cityName = document.getElementById('citySearch').value
-
-    if ( localStorage.pastSearches ){
-        JSON.parse(localStorage.pastSearches)
-    } else {
-        pastSearches = []
-    }
-    pastSearches.map(function(){
-        $('.list-group').html(`<li class="list-group-item">${pastSearches}</li>`)
-    })
-    pastSearches.push(cityName)
+    localStorage.setItem('cities', JSON.stringify(pastSearches))
 }
 
 
@@ -122,4 +111,8 @@ function searchWeather(){
     renderButtons()
 }
 
+$('.list-group-item').on('click', function(event){
+    event.preventDefault()
 
+    console.log(event)
+})
