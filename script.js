@@ -1,14 +1,11 @@
 
 
-//var pastSearches = JSON.parse(localStorage.pastSearches) ? JSON.parse(localStorage.pastSearches) : [];
 
 $('button').on('click', searchWeather);
 
 var pastSearches = localStorage.getItem('cities') ? JSON.parse(localStorage.getItem('cities')) : [];
 
 
-// localStorage.setItem("cities", JSON.stringify(pastSearches))
-// const data = JSON.parse(localStorage.getItem("cities"))
 
 
 function renderButtons(){
@@ -17,14 +14,18 @@ function renderButtons(){
     for (var i=0; i<pastSearches.length;i++){
         var a = $("<li>")
         a.addClass("list-group-item");
+        a.attr("onClick", "researchCity()")
         a.attr("data-name", pastSearches[i])
         a.text(pastSearches[i])
         $(".list-group").prepend(a)
     }
     localStorage.setItem('cities', JSON.stringify(pastSearches))
-    //localStorage.pastSearches = JSON.stringify(pastSearches)
 }
 
+function researchCity(){
+    console.log("[researchCity] reached")
+    //searchWeather()
+}
 
 
 function searchWeather(){
@@ -42,7 +43,6 @@ function searchWeather(){
         $('#temp').html(`Temperature: ${response.main.temp} &deg;C    Feels Like: ${response.main.feels_like} &deg;C`)
         $('#humid').text(`Humidity: ${response.main.humidity} %`)
         $('#wind').text(`Wind Speed ${response.wind.speed} km/h`)
-        //$('#uvIdx').text(`UV Index: ${response.current.uvi}`)
 
         function searchWeekWeather(){
             var cityLat = response.coord.lat
@@ -116,8 +116,3 @@ function searchWeather(){
 }
 
 
-$('.list-group-item').on('click', function(event){
-    event.preventDefault()
-
-    console.log(event)
-})
