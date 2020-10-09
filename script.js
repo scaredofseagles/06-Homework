@@ -34,7 +34,7 @@ function searchWeather(){
     
     pastSearches.push(cityName)
     $.ajax({
-        url:`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`,
+        url:`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`,
         method:"GET"
     }).then(function(response){
         $('#currentTime').html(`${moment().format("dddd, MMMM Do, h:mm a")}`)
