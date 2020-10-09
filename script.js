@@ -1,11 +1,14 @@
+
+
+//var pastSearches = JSON.parse(localStorage.pastSearches) ? JSON.parse(localStorage.pastSearches) : [];
+
 $('button').on('click', searchWeather);
 
+var pastSearches = localStorage.getItem('cities') ? JSON.parse(localStorage.getItem('cities')) : [];
 
-var pastSearches = localStorage.getItem(pastSearches) ? JSON.parse(localStorage.getItem(pastSearches)) : [];
 
-
-localStorage.setItem("cities", JSON.stringify(pastSearches))
-const data = JSON.parse(localStorage.getItem("cities"))
+// localStorage.setItem("cities", JSON.stringify(pastSearches))
+// const data = JSON.parse(localStorage.getItem("cities"))
 
 
 function renderButtons(){
@@ -18,9 +21,10 @@ function renderButtons(){
         a.text(pastSearches[i])
         $(".list-group").prepend(a)
     }
-
     localStorage.setItem('cities', JSON.stringify(pastSearches))
+    //localStorage.pastSearches = JSON.stringify(pastSearches)
 }
+
 
 
 function searchWeather(){
@@ -110,6 +114,7 @@ function searchWeather(){
     
     renderButtons()
 }
+
 
 $('.list-group-item').on('click', function(event){
     event.preventDefault()
