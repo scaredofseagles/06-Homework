@@ -90,7 +90,7 @@ $('#currentTime').html(`${moment().format("dddd, MMMM Do, h:mm a")}`)
 
 ## URL
 
-See the web application [here](https://scaredofseagles.github.io/06-Homework/)
+See the web application [here](https://scaredofseagles.github.io/Weather-Dashboard/)
 
 ## License
 
